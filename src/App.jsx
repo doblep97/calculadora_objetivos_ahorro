@@ -1,11 +1,12 @@
 import "./index.css";
 import GoalMoneyForm from "./components/GoalMoneyForm";
 import GoalResults from "./components/GoalResults";
+import TableResults from "./components/TableResults";
 import { useState } from "react";
-import { Box } from "@mui/material";
+import { Box, Tab } from "@mui/material";
 
 const App = () => {
-  const [data, setData] = useState({});
+  const [data, setData] = useState(null);
 
   // Si quisiera añadir uno después de otro objetivo
   // const handleDataForm = (newObjective) => {
@@ -44,8 +45,21 @@ const App = () => {
               borderRadius: 4,
               boxShadow: 5,
             }}
+            marginBottom={3}
           >
             <GoalResults data={data} />
+          </Box>
+        )}
+        {data && (
+          <Box
+            sx={{
+              backgroundColor: "#c6c4b8",
+              padding: 2,
+              borderRadius: 4,
+              boxShadow: 5,
+            }}
+          >
+            <TableResults data={data} />
           </Box>
         )}
       </Box>
