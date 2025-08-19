@@ -11,27 +11,41 @@ import getAllCalculsMonths from "../utils/getAllMonths";
 
 const TableResults = ({ data }) => {
   if (!data) return null;
-  console.log(data);
-  //Guardo en variables ambas fechas
+
   const currentDateData = currentDate();
   const goalDateData = data.goalDate;
-  //Extraigo de una fucnión toda la lista de meses de la fecha actual a la fecha objetivo
   const tableResults = getAllCalculsMonths(currentDateData, goalDateData, data);
 
   return (
     <>
-      <Typography variant="h6" sx={{ marginBottom: 1, textAlign: "center" }}>
+      <Typography variant="h6" sx={{ mb: 1, textAlign: "center" }}>
         Evolución de tu ahorro
       </Typography>
-      <TableContainer component={Paper}>
+
+      <TableContainer component={Paper} sx={{ bgcolor: "background.paper" }}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
-          <TableHead sx={{ backgroundColor: "green" }}>
+          <TableHead
+            sx={(theme) => {
+              const bg =
+                theme.palette.mode === "light"
+                  ? theme.palette.grey[400]
+                  : theme.palette.grey[800];
+              return {
+                backgroundColor: bg,
+                "& .MuiTableCell-head": {
+                  color: theme.palette.getContrastText(bg),
+                  fontWeight: 600,
+                },
+              };
+            }}
+          >
             <TableRow>
               <TableCell align="center">Fecha</TableCell>
               <TableCell align="center">Ahorro acumulado</TableCell>
               <TableCell align="center">Ahorro total</TableCell>
             </TableRow>
           </TableHead>
+
           <TableBody>
             {tableResults.map((item) => (
               <TableRow

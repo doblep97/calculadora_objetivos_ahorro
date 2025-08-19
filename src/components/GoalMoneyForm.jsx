@@ -135,52 +135,53 @@ const GoalMoneyForm = ({ onAddDataForm, resetData }) => {
               : ""
           }
         />
+        <Box display={"flex"} gap={3}>
+          {/* Ahorro inicial */}
+          <FormControl
+            fullWidth
+            variant="standard"
+            error={submitedError && initialAmount.trim() === ""}
+          >
+            <InputLabel htmlFor="standard-adornment-amount">
+              Ahorro inicial
+            </InputLabel>
+            <Input
+              name="initialAmount"
+              id="standard-adornment-amount"
+              endAdornment={<InputAdornment position="start">€</InputAdornment>}
+              onChange={handleChangeInitiallAmount}
+              value={initialAmount}
+            />
+            {submitedError && initialAmount.trim() === "" && (
+              <Typography variant="caption" color="error">
+                Este campo es obligatorio
+              </Typography>
+            )}
+          </FormControl>
 
-        {/* Ahorro inicial */}
-        <FormControl
-          fullWidth
-          variant="standard"
-          error={submitedError && initialAmount.trim() === ""}
-        >
-          <InputLabel htmlFor="standard-adornment-amount">
-            Ahorro inicial
-          </InputLabel>
-          <Input
-            name="initialAmount"
-            id="standard-adornment-amount"
-            endAdornment={<InputAdornment position="start">€</InputAdornment>}
-            onChange={handleChangeInitiallAmount}
-            value={initialAmount}
-          />
-          {submitedError && initialAmount.trim() === "" && (
-            <Typography variant="caption" color="error">
-              Este campo es obligatorio
-            </Typography>
-          )}
-        </FormControl>
-
-        {/* Objetivo de ahorro final */}
-        <FormControl
-          fullWidth
-          variant="standard"
-          error={submitedError && goalAmount.trim() === ""}
-        >
-          <InputLabel htmlFor="standard-adornment-amount">
-            Objetivo de ahorro
-          </InputLabel>
-          <Input
-            name="goalAmount"
-            id="standard-adornment-amount"
-            endAdornment={<InputAdornment position="start">€</InputAdornment>}
-            onChange={handleChangeGoalAmount}
-            value={goalAmount}
-          />
-          {submitedError && goalAmount.trim() === "" && (
-            <Typography variant="caption" color="error">
-              Este campo es obligatorio
-            </Typography>
-          )}
-        </FormControl>
+          {/* Objetivo de ahorro final */}
+          <FormControl
+            fullWidth
+            variant="standard"
+            error={submitedError && goalAmount.trim() === ""}
+          >
+            <InputLabel htmlFor="standard-adornment-amount">
+              Objetivo de ahorro
+            </InputLabel>
+            <Input
+              name="goalAmount"
+              id="standard-adornment-amount"
+              endAdornment={<InputAdornment position="start">€</InputAdornment>}
+              onChange={handleChangeGoalAmount}
+              value={goalAmount}
+            />
+            {submitedError && goalAmount.trim() === "" && (
+              <Typography variant="caption" color="error">
+                Este campo es obligatorio
+              </Typography>
+            )}
+          </FormControl>
+        </Box>
 
         {/* Fecha para cumplir el ahorro final */}
         <TextField
