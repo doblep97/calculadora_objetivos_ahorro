@@ -19,7 +19,7 @@ const styleModal = {
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: 400,
+  width: "35%",
   bgcolor: "background.paper",
   boxShadow: 24,
   p: 4,
@@ -30,7 +30,7 @@ const styleModal = {
   textAlign: "center",
 };
 
-const GoalMoneyForm = ({ onAddDataForm, resetData }) => {
+const GoalMoneyForm = ({ onAddDataForm, resetData, handleCloseModalForm }) => {
   const [objectiveName, setObjectiveName] = useState("");
   const [goalAmount, setGoalAmount] = useState("");
   const [initialAmount, setInitialAmount] = useState("");
@@ -95,16 +95,8 @@ const GoalMoneyForm = ({ onAddDataForm, resetData }) => {
 
     setSubmitedError(false);
     onAddDataForm(objectiveData);
-  };
-
-  const handleReset = () => {
-    setSubmitedError(false);
-    setGoalDate("");
-    setInitialAmount("");
-    setGoalAmount("");
-    setObjectiveName("");
-    //Activamos la función que se envía desde 'app' para que devuelva null y no pinte los resultados
-    resetData();
+    //Quita el modal
+    handleCloseModalForm();
   };
 
   const handleCloseModal = () => setOpenModal(false);
@@ -120,6 +112,16 @@ const GoalMoneyForm = ({ onAddDataForm, resetData }) => {
         display={"flex"}
         flexDirection={"column"}
         gap={3}
+        sx={(theme) => ({
+          "& input:-webkit-autofill": {
+            // truco: igualamos fondo al del modal
+            backgroundColor: `${theme.palette.background.paper} !important`,
+            WebkitBoxShadow: "0 0 0px 1000px transparent inset", // anulamos el halo
+            WebkitTextFillColor:
+              theme.palette.mode === "light" ? "#000000" : "#ffffff",
+            transition: "background-color 9999s ease-in-out 0s", // evita parpadeo amarillo
+          },
+        })}
       >
         {/* Nombre del objetivo */}
         <TextField
@@ -199,6 +201,14 @@ const GoalMoneyForm = ({ onAddDataForm, resetData }) => {
           helperText={
             submitedError && goalDate === "" ? "Este campo es obligatorio" : ""
           }
+          sx={(theme) => ({
+            "& input::-webkit-calendar-picker-indicator": {
+              filter:
+                theme.palette.mode === "dark"
+                  ? "invert(1)" // 👈 en modo oscuro lo ponemos blanco
+                  : "invert(0)", // en modo claro se queda normal
+            },
+          })}
         />
         <Box
           display={"flex"}
@@ -206,15 +216,8 @@ const GoalMoneyForm = ({ onAddDataForm, resetData }) => {
           flexWrap={"wrap"}
           gap={3}
         >
-          <Button
-            variant="contained"
-            onClick={handleReset}
-            sx={{ minWidth: "55%" }}
-          >
-            Establecer otro objetivo
-          </Button>
-          <Button variant="contained" type="submit" sx={{ minWidth: "40%" }}>
-            Calcular
+          <Button variant="contained" type="submit" sx={{ minWidth: "30%" }}>
+            Añadir
           </Button>
         </Box>
       </Box>
@@ -262,9 +265,9 @@ const GoalMoneyForm = ({ onAddDataForm, resetData }) => {
           <Button
             variant="contained"
             onClick={handleCloseDateModal}
-            sx={{ mt: 2, maxWidth: "50%" }}
+            sx={{ mt: 2, minWidth: "50%" }}
           >
-            ¡Voy a corregirlo!
+            ¡Lo corrijo!
           </Button>
         </Box>
       </Modal>
