@@ -1,6 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import GoalMoneyForm from "./GoalMoneyForm";
-import GoalResults from "./GoalResults";
 import TableResults from "./TableResults";
 import { Box, Button, Typography, Modal } from "@mui/material";
 import ObjectivesList from "./ObjectivesList";
@@ -21,9 +20,17 @@ const styleModal = {
   textAlign: "center",
 };
 
+const initialData = JSON.parse(localStorage.getItem("data")) || [];
+
 const Objectives = () => {
-  const [dataObjectives, setDataObjectives] = useState([]); //cambiar en componentes
+  const [dataObjectives, setDataObjectives] = useState(initialData); //cambiar en componentes
   const [openModalForm, setOpenModalForm] = useState(false);
+
+  //Guardamos el data en LocalStorage
+  useEffect(
+    () => localStorage.setItem("data", JSON.stringify(dataObjectives)),
+    [dataObjectives]
+  );
 
   const handleCloseModalForm = () => setOpenModalForm(false);
 
@@ -145,32 +152,18 @@ const Objectives = () => {
           </Box>
         </>
       )}
-
-      {/* {data && (
-          <Box
-            sx={{
-              backgroundColor: themeApp.palette.boxBackground, // 👈 usa la instancia que tú creaste
-              padding: 2,
-              borderRadius: 4,
-              boxShadow: 5,
-            }}
-            marginBottom={3}
-          >
-            <GoalResults data={data} />
-          </Box>
-        )}
-        {data.length > 0 && (
-          <Box
-            sx={{
-              backgroundColor: themeApp.palette.boxBackground, // 👈 usa la instancia que tú creaste
-              padding: 2,
-              borderRadius: 4,
-              boxShadow: 5,
-            }}
-          >
-            <TableResults data={data} />
-          </Box>
-        )} */}
+      {/* {data.length > 0 && (
+        <Box
+          sx={{
+            backgroundColor: themeApp.palette.boxBackground, // 👈 usa la instancia que tú creaste
+            padding: 2,
+            borderRadius: 4,
+            boxShadow: 5,
+          }}
+        >
+          <TableResults data={data} />
+        </Box>
+      )}{" "} */}
       {/*Modal para el formulario */}
       <Modal
         open={openModalForm}
