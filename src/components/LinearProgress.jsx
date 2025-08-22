@@ -56,13 +56,18 @@ const LinearProgressWithLabel = (props) => {
           justifyContent={"center"}
           gap={2}
         >
-          <Typography>¡Objetivo conseguido!</Typography>
+          <Typography variant="h4" align="center">
+            🎉 Enhorabuena 🎉
+          </Typography>{" "}
+          <Typography variant="h6">
+            Has logrado alcanzar tu objetivo de ahorro
+          </Typography>
           <Box>
             <Button
               variant="contained"
               onClick={() => onDelete(dataObjective.id)}
             >
-              ¡Volver a mis ahorros!
+              ¡Sigo a por más!
             </Button>
           </Box>
         </Box>
