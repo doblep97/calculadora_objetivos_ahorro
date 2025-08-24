@@ -58,7 +58,7 @@ const LinearProgressWithLabel = (props) => {
         >
           <Typography variant="h4" align="center">
             🎉 Enhorabuena 🎉
-          </Typography>{" "}
+          </Typography>
           <Typography variant="h6">
             Has logrado alcanzar tu objetivo de ahorro
           </Typography>

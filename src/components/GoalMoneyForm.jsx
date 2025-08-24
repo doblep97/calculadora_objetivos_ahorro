@@ -104,7 +104,7 @@ const GoalMoneyForm = ({ onAddDataForm, resetData, handleCloseModalForm }) => {
   return (
     <>
       <Typography variant="h5" gutterBottom sx={{ textAlign: "center" }}>
-        Calculadora de ahorros para objetivos personales
+        Objetivo de ahorro{" "}
       </Typography>
       <Box
         component="form"

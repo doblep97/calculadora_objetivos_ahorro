@@ -16,7 +16,7 @@ import Objectives from "./components/Objectives";
 
 const App = () => {
   // 1) Preferencia del sistema para primer render
-  const prefersDark = useMediaQuery("(prefers-color-scheme: dark)");
+  const prefersDark = useMediaQuery("(prefers-color-scheme: light)");
 
   // 2) Carga inicial desde localStorage o SO
   const [mode, setMode] = useState(() => {

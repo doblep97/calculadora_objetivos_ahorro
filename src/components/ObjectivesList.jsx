@@ -293,7 +293,7 @@ const ObjectivesList = (props) => {
                       <Typography variant="subtitle1">
                         Faltan{" "}
                         <span style={{ fontWeight: "bold" }}>
-                          {totalMoney} €
+                          {totalMoney.toFixed(2)} €
                         </span>{" "}
                         para alcanzar tu objetivo de ahorro
                       </Typography>
